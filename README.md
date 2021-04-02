@@ -26,17 +26,17 @@ function calc() {
 3. The block can only see **the properties** of the objects passed in - also globals.
 ```js
 function burger_kind() {
-  const pizza = "Pepperoni"
+  const burger = "Jalapeño"
   
   // nothing is passed into our `use` block
   use({})(() => {
     
     try {
-      pizza = "Pineapple"
+      burger = "Cheese"
     } 
     catch (error) {
       // the console will print "error" 
-      // the use block does not know about `pizza`
+      // the use block does not know about `burger`
       // it only knows of things passed in or globals
       //
       console.log("error")
@@ -62,6 +62,23 @@ function calc_but_harder() {
   return {original: num, result: new_num}
 }
 ```
+  
+### Exporting local variables / Returning the function but paused
+```js
+function car_color() {
+  const color = "red"
+  
+  const paused_scope = use({color})
+
+  paused_scope(() => color = "blue")
+
+  paused_scope(() => console.log(color)) // blue
+
+  console.log(color) // red
+
+  return paused_scope // now you have the paused scope to run functions against.
+}
+``` 
   
 References:  
 Andrea Giammarchi, @/Simon_, Brian Will, Jonathan Blow
