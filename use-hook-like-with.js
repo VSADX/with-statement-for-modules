@@ -1,4 +1,4 @@
-function use(...args) {
+export function use(...args) {
   
     const compiledObj = args.reduce((obj, arg) =>
         Object.getOwnPropertyNames(arg)
