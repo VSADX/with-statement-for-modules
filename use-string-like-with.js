@@ -1,12 +1,8 @@
 // from https://gist.github.com/0kku/d67e9a685bde9c159ff3bc4c4ee923b1
 // by   https://github.com/0kku
-function use (
-  ...objects
-) {
+export function use(...objects) {
   const values = [];
-  const keys = (
-    objects
-    .flatMap(object => {
+  const keys = (objects.flatMap(object => {
       const prototypeChain = [];
       do {
         prototypeChain.unshift(object);
@@ -20,19 +16,14 @@ function use (
     })
   );
 
-  return (
-    strings,
-    ...slots
-  ) => new Function(
+  return (strings, ...slots) => new Function(
     ...keys,
     strings.reduce((a, b, i) => a + String(slots[i]) + b),
   )(...values);
 }
 
-console.log(
-  With(Math, {a: 2})`
+if(false) console.log(
+  use(Math, {a: 2})`
     return valueOf.call(PI * a);
   `
 );
-
-export {};
