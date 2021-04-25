@@ -7,7 +7,7 @@ function withly(obj, func) {
     return element.result
 }
 
-export use(...args) {
+export function use(...args) {
   const element = document.createElement("div")
   args.forEach(obj => Object.defineProperties(element, Object.getOwnPropertyDescriptors(obj)))
   element[Symbol.for("html-with")] = undefined
