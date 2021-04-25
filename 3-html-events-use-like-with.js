@@ -1,10 +1,15 @@
 // concept
-function withly(obj, func) {
-    const element = Object.defineProperties(document.createElement("div"), Object.getOwnPropertyDescriptors(obj))
+async function withly(obj, func) {
+  return new Promise((resolve, reject) => {
+    const element = Object.defineProperties(document.createElement("div"), {
+      ...Object.getOwnPropertyDescriptors(obj),
+      resolve: { enumerable: true, value: resolve },
+      reject: { enumerable: true, value: reject }
+    })
     element.result = undefined
-    element.setAttribute("onclick", `result = (${func})()`)
+    element.setAttribute("onclick", `try { resolve(result = (${func})()) } catch (e) { reject(e) }`)
     element.click()
-    return element.result
+  })
 }
 
 export function use(...args) {
