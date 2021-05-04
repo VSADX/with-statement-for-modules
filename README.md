@@ -49,12 +49,12 @@ function calc() {
   // we know our function never uses `z`
   //
   y = use({x,y})(() => {
-    x /= 4
+    x /= 4 // doesn't change the `x` outside this function
     y = x + y
     return y
   })
 
-  return {x, y}
+  return {x, y} // 4, 4
 }
 ```
   
