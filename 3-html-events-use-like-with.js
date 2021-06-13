@@ -19,6 +19,6 @@ export function use(...args) {
   return fn => {
     element.setAttribute("onclick", `this[Symbol.for("html-with")] = (${fn})()`)
     element.click()
-    return element[Symbol.for("html=with")]
+    return element[Symbol.for("html-with")]
   }
 }
